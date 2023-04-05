@@ -11,13 +11,19 @@ Imports System.Web.Services.Protocols
 Public Class login1
     Inherits System.Web.Services.WebService
     Public Function Get_ConectionString() As String
-        Dim SQLServer_Conection_String As String = "Data Source=LAPTOP-I0DKJOIN\ERICKSQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1706Erick"
+        Dim SQLServer_Conection_String As String = "Data Source=LAPTOP-4N86038V; Initial Catalog=tienda_1; User ID=sa; Password=jmsa"
         Return SQLServer_Conection_String
     End Function
 
+    Public Class ValidacionSesion
+        Public Property Resultado As Boolean
+        Public Property TipoUsuario As String
+    End Class
+
     <WebMethod>
-    Public Function ValidarSesion(usuario As String, psw As String) As Boolean
+    Public Function ValidarSesion(usuario As String, psw As String) As ValidacionSesion
         Dim resultado As Boolean = False
+        Dim tipoUsuario As String = ""
         Dim connectionString As String = Get_ConectionString()
         Try
             Using connection As New SqlConnection(connectionString)
@@ -27,13 +33,22 @@ Public Class login1
                     command.Parameters.AddWithValue("@usuario", usuario)
                     command.Parameters.AddWithValue("@psw", psw)
                     Dim count As Integer = Convert.ToInt32(command.ExecuteScalar())
-                    resultado = count > 0
+                    If count > 0 Then
+                        ' Si las credenciales son válidas, determinar el tipo de usuario
+                        query = "SELECT usuario FROM Usuarios WHERE usuario=@usuario AND psw=@psw"
+                        Using command2 As New SqlCommand(query, connection)
+                            command2.Parameters.AddWithValue("@usuario", usuario)
+                            command2.Parameters.AddWithValue("@psw", psw)
+                            tipoUsuario = Convert.ToString(command2.ExecuteScalar())
+                        End Using
+                        resultado = True
+                    End If
                 End Using
             End Using
         Catch ex As Exception
             resultado = False
         End Try
-        Return resultado
+        Return New ValidacionSesion With {.resultado = resultado, .tipoUsuario = tipoUsuario}
     End Function
 
 
