@@ -12,7 +12,7 @@ Public Class CrudProductos
     Inherits System.Web.Services.WebService
 
     Public Function Get_ConectionString() As String
-        Dim SQLServer_Conection_String = "Data Source=JONATHAN\SQLEXPRESS; Initial Catalog=Tienda; User ID= sa; Password=aaa"
+        Dim SQLServer_Conection_String = "Data Source=LAPTOP-I0DKJOIN\ERICKSQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1706Erick"
         Return SQLServer_Conection_String
     End Function
 
