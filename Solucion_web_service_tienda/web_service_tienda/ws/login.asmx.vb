@@ -11,7 +11,7 @@ Imports System.Web.Services.Protocols
 Public Class login1
     Inherits System.Web.Services.WebService
     Public Function Get_ConectionString() As String
-        Dim SQLServer_Conection_String As String = "Data Source=LAPTOP-I0DKJOIN\ERICKSQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1706Erick"
+        Dim SQLServer_Conection_String As String = "Data Source=DESKTOP-H08JMC2\SQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1234.abcd"
         Return SQLServer_Conection_String
     End Function
 
