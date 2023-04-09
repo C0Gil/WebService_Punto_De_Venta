@@ -125,13 +125,6 @@ Public Class CrudProductos
                     Dim disponibilidad As Boolean = Convert.ToBoolean(reader("disponibilidad"))
                     Dim idCategoria As Integer = Convert.ToInt32(reader("idCategoria"))
 
-                    'Return "Nombre del producto: " + producto + "<br/>" +
-                    '  "Precio de venta: " + precioVenta.ToString() + "<br/>" +
-                    ' "Precio de compra: " + precioCompra.ToString() + "<br/>" +
-                    '"Fecha de caducidad: " + fechaCaducidad.ToString("dd/MM/yyyy") + "<br/>" +
-                    '  "Stock: " + stock.ToString() + "<br/>" +
-                    ' "Disponibilidad: " + disponibilidad.ToString() + "<br/>" +
-                    '"ID de categoría: " + idCategoria.ToString()
                     salida.Item1 = producto
                     salida.Item2 = precioVenta.ToString()
                     salida.Item3 = precioCompra.ToString()
