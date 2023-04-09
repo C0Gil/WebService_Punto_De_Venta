@@ -12,7 +12,7 @@ Public Class CrudProductos
     Inherits System.Web.Services.WebService
 
     Public Function Get_ConectionString() As String
-        Dim SQLServer_Conection_String = "Data Source=LAPTOP-I0DKJOIN\ERICKSQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1706Erick"
+        Dim SQLServer_Conection_String = "Data Source=DESKTOP-H08JMC2\SQLEXPRESS; Initial Catalog=tienda; User ID=sa; Password=1234.abcd"
         Return SQLServer_Conection_String
     End Function
 
@@ -28,7 +28,7 @@ Public Class CrudProductos
             conexion.Open()
 
 
-            sql = "INSERT INTO [dbo].[Productos] ([idProducto], [producto], [precioVenta], [precioCompra], [fechaCaducidad], [stock], [disponibilidad], [idCategoria]) VALUES(" + idpro.ToString() + ",'" + pro + "'," + preven.ToString() + "," + precom.ToString() + ",'" + cadu.ToString("dd/MM/yyyy") + "'," + sto.ToString() + "," + If(disp, "1", "0") + "," + idcat.ToString() + " )"
+            sql = "INSERT INTO [dbo].[Productos] ([idProducto], [producto], [precioVenta], [precioCompra], [fechaCaducidad], [stock], [disponibilidad], [idCategoria]) VALUES(" + idpro.ToString() + ",'" + pro + "'," + preven.ToString() + "," + precom.ToString() + ",'" + cadu.ToString("yyyy/MM/dd") + "'," + sto.ToString() + "," + If(disp, "1", "0") + "," + idcat.ToString() + " )"
 
 
             With mycmd
@@ -55,7 +55,7 @@ Public Class CrudProductos
             conexion.Open()
 
 
-            sql = "UPDATE [dbo].[Productos] SET [producto] = '" + pro + "', [precioVenta] = " + preven.ToString() + ", [precioCompra] = " + precom.ToString() + ", [fechaCaducidad] = '" + cadu.ToString("dd/MM/yyyy") + "', [stock] = " + sto.ToString() + ", [disponibilidad] = " + If(disp, "1", "0") + ", [idCategoria] = " + idcat.ToString() + " WHERE [idProducto] = " + idpro.ToString()
+            sql = "UPDATE [dbo].[Productos] SET [producto] = '" + pro + "', [precioVenta] = " + preven.ToString() + ", [precioCompra] = " + precom.ToString() + ", [fechaCaducidad] = '" + cadu.ToString("yyyy/MM/dd") + "', [stock] = " + sto.ToString() + ", [disponibilidad] = " + If(disp, "1", "0") + ", [idCategoria] = " + idcat.ToString() + " WHERE [idProducto] = " + idpro.ToString()
 
             With mycmd
                 .CommandText = sql
@@ -94,7 +94,8 @@ Public Class CrudProductos
     End Function
 
     <WebMethod()>
-    Public Function BuscarProducto(idpro As Integer) As String
+    Public Function BuscarProducto(idpro As Integer) As (String, String, String, String, String, String, String)
+        Dim salida As (String, String, String, String, String, String, String)
         Try
             Dim sql As String
             Dim mycmd As New SqlCommand
@@ -124,23 +125,47 @@ Public Class CrudProductos
                     Dim disponibilidad As Boolean = Convert.ToBoolean(reader("disponibilidad"))
                     Dim idCategoria As Integer = Convert.ToInt32(reader("idCategoria"))
 
-                    Return "Nombre del producto: " + producto + "<br/>" +
-                       "Precio de venta: " + precioVenta.ToString() + "<br/>" +
-                       "Precio de compra: " + precioCompra.ToString() + "<br/>" +
-                       "Fecha de caducidad: " + fechaCaducidad.ToString("dd/MM/yyyy") + "<br/>" +
-                       "Stock: " + stock.ToString() + "<br/>" +
-                       "Disponibilidad: " + disponibilidad.ToString() + "<br/>" +
-                       "ID de categoría: " + idCategoria.ToString()
+                    'Return "Nombre del producto: " + producto + "<br/>" +
+                    '  "Precio de venta: " + precioVenta.ToString() + "<br/>" +
+                    ' "Precio de compra: " + precioCompra.ToString() + "<br/>" +
+                    '"Fecha de caducidad: " + fechaCaducidad.ToString("dd/MM/yyyy") + "<br/>" +
+                    '  "Stock: " + stock.ToString() + "<br/>" +
+                    ' "Disponibilidad: " + disponibilidad.ToString() + "<br/>" +
+                    '"ID de categoría: " + idCategoria.ToString()
+                    salida.Item1 = producto
+                    salida.Item2 = precioVenta.ToString()
+                    salida.Item3 = precioCompra.ToString()
+                    salida.Item4 = fechaCaducidad.ToString("dd/MM/yyyy")
+                    salida.Item5 = stock.ToString()
+                    salida.Item6 = disponibilidad.ToString()
+                    salida.Item7 = idCategoria.ToString()
+
+                    Return salida
                 End While
             Else
-                Return "No se encontró ningún producto con el ID especificado"
+                salida.Item1 = "No se encontró ningún producto con el ID especificado"
+                salida.Item2 = Nothing
+                salida.Item3 = Nothing
+                salida.Item4 = Nothing
+                salida.Item5 = Nothing
+                salida.Item6 = Nothing
+                salida.Item7 = Nothing
+                Return salida
             End If
 
             conexion.Close()
 
         Catch ex As Exception
-            Return ex.ToString
+            salida.Item1 = ex.ToString
+            salida.Item2 = Nothing
+            salida.Item3 = Nothing
+            salida.Item4 = Nothing
+            salida.Item5 = Nothing
+            salida.Item6 = Nothing
+            salida.Item7 = Nothing
+            Return salida
         End Try
+        Return Nothing
     End Function
 
 
