@@ -240,6 +240,7 @@
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Account\Web.config" />
     <Content Include="ws\CrudProductos.asmx" />
+    <Content Include="ws\CrudVentas.asmx" />
     <Content Include="ws\DatosTablas.asmx" />
     <Content Include="ws\login.asmx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -450,6 +451,10 @@
     </Compile>
     <Compile Include="ws\CrudProductos.asmx.vb">
       <DependentUpon>CrudProductos.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\CrudVentas.asmx.vb">
+      <DependentUpon>CrudVentas.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ws\DatosTablas.asmx.vb">

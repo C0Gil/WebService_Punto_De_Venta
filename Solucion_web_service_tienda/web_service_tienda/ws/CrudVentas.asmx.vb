@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports System.Data.SqlClient
 Imports System.Web.Services
 Imports System.Web.Services.Protocols
 
@@ -16,8 +17,104 @@ Public Class CrudVentas
     End Function
 
     <WebMethod()>
-    Public Function InsertarVenta() As String
-        Return "Hola a todos"
+    Public Function InsertarVenta(fecha As Date, monto As Double) As String
+        Try
+            Dim sql As String
+            Dim mycmd As New SqlCommand
+            Dim reader As SqlDataReader
+            Dim conexion As New SqlConnection(Get_ConectionString())
+            Dim idEstaVenta As Integer
+
+            'Recuperar id De Ultima Venta
+            conexion.Open()
+
+            sql = "SELECT TOP (1) [idVenta] FROM [tienda].[dbo].[Ventas] ORDER BY [idVenta] DESC"
+
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+
+            reader = mycmd.ExecuteReader
+
+            If reader.HasRows Then
+                While reader.Read()
+                    idEstaVenta = Convert.ToInt32(reader("idVenta")) + 1
+                End While
+            Else
+                Return "Error al Agregar Venta"
+            End If
+            conexion.Close()
+
+            'Insertar la Venta
+            conexion.Open()
+            sql = "INSERT INTO [dbo].[Ventas] ([idVenta] ,[fechaVenta] ,[monto]) VALUES(" + idEstaVenta.ToString() + ",'" + fecha.ToString("yyyy/MM/dd") + "'," + monto.ToString() + ")"
+
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+            reader = mycmd.ExecuteReader
+            conexion.Close()
+
+            Return idEstaVenta.ToString()
+        Catch ex As Exception
+            Return ex.ToString
+        End Try
+        Return Nothing
+    End Function
+
+    <WebMethod()>
+    Public Function IsertarVentaProducto(idVenta As Integer, idProducto As Integer) As String
+        Try
+            Dim sql As String
+            Dim mycmd As New SqlCommand
+            Dim reader As SqlDataReader
+            Dim conexion As New SqlConnection(Get_ConectionString())
+            Dim idEsteRegistro As Integer
+
+            'Recuperar ultimo id de ultimo registro
+            conexion.Open()
+
+            sql = "SELECT TOP (1) [idVentaProducto] FROM [tienda].[dbo].[VentaProducto] ORDER BY [idVentaProducto] DESC"
+
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+
+            reader = mycmd.ExecuteReader
+
+            If reader.HasRows Then
+                While reader.Read()
+                    idEsteRegistro = Convert.ToInt32(reader("idVentaProducto")) + 1
+                End While
+            Else
+                Return "Error al Agregar Venta"
+            End If
+            conexion.Close()
+            ' Realizar Inserccion
+            conexion.Open()
+
+            sql = "INSERT INTO [dbo].[VentaProducto] ([idVentaProducto] ,[idVenta] ,[idProducto]) VALUES(" + idEsteRegistro.ToString() + "," + idVenta.ToString() + "," + idProducto.ToString() + " )"
+
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+            reader = mycmd.ExecuteReader
+            conexion.Close()
+
+            Return "Relacion Realizada"
+        Catch ex As Exception
+            Return ex.ToString
+        End Try
+        Return Nothing
+    End Function
+
+    <WebMethod()>
+    Public Function IsertarUsuarioVenta(idUsuario As Integer, idVevnta As Integer) As String
+        Return Nothing
     End Function
 
 End Class
