@@ -248,6 +248,7 @@
     <Content Include="ws\CrudProductos.asmx" />
     <Content Include="ws\CrudVentas.asmx" />
     <Content Include="ws\DatosTablas.asmx" />
+    <Content Include="ws\GeneradorReportes.asmx" />
     <Content Include="ws\GeneradorTickets.asmx" />
     <Content Include="ws\login.asmx" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
@@ -466,6 +467,10 @@
     </Compile>
     <Compile Include="ws\DatosTablas.asmx.vb">
       <DependentUpon>DatosTablas.asmx</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="ws\GeneradorReportes.asmx.vb">
+      <DependentUpon>GeneradorReportes.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ws\GeneradorTickets.asmx.vb">

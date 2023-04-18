@@ -442,3 +442,6 @@ C:\Users\Gilberto\Documents\GitHub\WebService_Punto_De_Venta\Solucion_web_servic
 C:\Users\Gilberto\Documents\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\obj\Debug\web_service_tienda.dll
 C:\Users\Gilberto\Documents\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\obj\Debug\WebForms_Basic.xml
 C:\Users\Gilberto\Documents\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\obj\Debug\web_service_tienda.pdb
+C:\Users\Youcr\OneDrive\Documentos\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\bin\BouncyCastle.Crypto.dll
+C:\Users\Youcr\OneDrive\Documentos\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\bin\itextsharp.dll
+C:\Users\Youcr\OneDrive\Documentos\GitHub\WebService_Punto_De_Venta\Solucion_web_service_tienda\web_service_tienda\bin\itextsharp.xml
