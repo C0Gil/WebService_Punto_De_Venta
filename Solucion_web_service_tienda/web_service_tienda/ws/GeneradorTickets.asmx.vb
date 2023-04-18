@@ -2,6 +2,8 @@
 Imports System.Data.SqlClient
 Imports System.Web.Services
 Imports System.Web.Services.Protocols
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf
 
 ' Para permitir que se llame a este servicio web desde un script, usando ASP.NET AJAX, quite la marca de comentario de la línea siguiente.
 ' <System.Web.Script.Services.ScriptService()> _
@@ -14,7 +16,7 @@ Public Class GeneradorTickets
     <WebMethod()>
     Public Function GenerarTicket(ByVal idVenta As Integer) As String
         Dim ticket As New StringBuilder()
-        Dim connectionString As String = "Data Source=JONATHAN\SQLEXPRESS; Initial Catalog=Tienda; User ID= sa; Password=aaa"
+        Dim connectionString As String = "Data Source=LAPTOP-4N86038V; Initial Catalog=tiendaa; User ID= sa; Password=jmsa"
 
         'Obtenemos los datos de la venta
         Dim query As String = $"SELECT v.*  FROM Ventas v  WHERE v.IdVenta = {idVenta}"
@@ -42,5 +44,25 @@ Public Class GeneradorTickets
 
         Return ticket.ToString()
     End Function
+
+    <WebMethod()>
+    Public Sub ImprimirTicket(ByVal idVenta As Integer)
+        'Generamos el ticket
+        Dim ticket As String = GenerarTicket(idVenta)
+
+        'Generamos el archivo PDF
+        Dim pdfDoc As New iTextSharp.text.Document()
+        Dim pdfWriter As PdfWriter = pdfWriter.GetInstance(pdfDoc, HttpContext.Current.Response.OutputStream)
+        pdfDoc.Open()
+        pdfDoc.Add(New Paragraph(ticket))
+        pdfDoc.Close()
+
+        'Descargamos el archivo PDF
+        HttpContext.Current.Response.ContentType = "application/pdf"
+        HttpContext.Current.Response.AddHeader("content-disposition", $"attachment;filename=TICKET-{idVenta}.pdf")
+        HttpContext.Current.Response.Cache.SetCacheability(HttpCacheability.NoCache)
+        HttpContext.Current.Response.Write(pdfDoc)
+        HttpContext.Current.Response.End()
+    End Sub
 
 End Class
