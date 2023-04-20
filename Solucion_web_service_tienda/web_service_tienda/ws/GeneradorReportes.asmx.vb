@@ -30,9 +30,9 @@ Public Class GeneradorReportes
         adaptador.Fill(tablaVentas)
         conexion.Close()
 
-        Dim ventas As String = ""
+        Dim ventas As String = "Fecha de venta" + " ->                " + "Producto" + " -> " + "Monto" + " -> " + "Precio de venta" + vbCrLf + vbCrLf ' Encabezado
         For Each fila As DataRow In tablaVentas.Rows
-            ventas += fila("FechaVenta").ToString() + " -> " + fila("producto").ToString() + " -> " + fila("Monto").ToString() + " -> " + fila("precioVenta").ToString() + vbCrLf
+            ventas += fila("FechaVenta").ToString() + " ->          " + fila("producto").ToString() + " : " + fila("Monto").ToString() + " : " + fila("precioVenta").ToString() + vbCrLf
         Next
 
         Return ventas
