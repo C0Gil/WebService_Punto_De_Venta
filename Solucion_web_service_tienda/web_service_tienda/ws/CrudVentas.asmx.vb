@@ -65,7 +65,7 @@ Public Class CrudVentas
     End Function
 
     <WebMethod()>
-    Public Function IsertarVentaProducto(idVenta As Integer, idProducto As Integer) As String
+    Public Function IsertarVentaProducto(idVenta As String, idProducto As String, cantidad As String) As String
         Try
             Dim sql As String
             Dim mycmd As New SqlCommand
@@ -95,9 +95,7 @@ Public Class CrudVentas
             conexion.Close()
             ' Realizar Inserccion
             conexion.Open()
-
-            sql = "INSERT INTO [dbo].[VentaProducto] ([idVentaProducto] ,[idVenta] ,[idProducto]) VALUES(" + idEsteRegistro.ToString() + "," + idVenta.ToString() + "," + idProducto.ToString() + " )"
-
+            sql = "INSERT INTO [dbo].[VentaProducto] ([idVentaProducto] ,[idVenta] ,[idProducto], [cantidadProducto]) VALUES(" + idEsteRegistro.ToString() + "," + idVenta + "," + idProducto + "," + cantidad + " )"
             With mycmd
                 .CommandText = sql
                 .Connection = conexion
@@ -105,7 +103,7 @@ Public Class CrudVentas
             reader = mycmd.ExecuteReader
             conexion.Close()
 
-            Return "Relacion Realizada"
+            Return idEsteRegistro.ToString()
         Catch ex As Exception
             Return ex.ToString
         End Try
@@ -113,7 +111,50 @@ Public Class CrudVentas
     End Function
 
     <WebMethod()>
-    Public Function IsertarUsuarioVenta(idUsuario As Integer, idVevnta As Integer) As String
+    Public Function IsertarUsuarioVenta(idUsuario As String, idVenta As String) As String
+        Try
+            Dim sql As String
+            Dim mycmd As New SqlCommand
+            Dim reader As SqlDataReader
+            Dim conexion As New SqlConnection(Get_ConectionString())
+            Dim idEsteRegistro As Integer
+
+            'Recuperar ultimo id de ultimo registro
+            conexion.Open()
+
+            sql = "SELECT TOP (1) [idVentaVendedor] FROM [tienda].[dbo].[VentaVendedor] ORDER BY [idVentaVendedor] DESC"
+
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+
+            reader = mycmd.ExecuteReader
+
+            If reader.HasRows Then
+                While reader.Read()
+                    idEsteRegistro = Convert.ToInt32(reader("idVentaVendedor")) + 1
+                End While
+            Else
+                Return "Error al Agregar Venta"
+            End If
+
+            conexion.Close()
+            ' Realizar Inserccion
+            conexion.Open()
+            sql = "INSERT INTO [dbo].[VentaVendedor] ([idVentaVendedor] ,[idUsuario] ,[idVenta]) VALUES(" + idEsteRegistro.ToString() + "," + idUsuario + "," + idVenta + " )"
+            With mycmd
+                .CommandText = sql
+                .Connection = conexion
+            End With
+            reader = mycmd.ExecuteReader
+            conexion.Close()
+
+            Return idEsteRegistro.ToString()
+        Catch ex As Exception
+            Return ex.ToString
+        End Try
+
         Return Nothing
     End Function
 

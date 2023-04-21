@@ -16,7 +16,7 @@ Public Class GeneradorTickets
     <WebMethod()>
     Public Function GenerarTicket(ByVal idVenta As Integer) As String
         Dim ticket As New StringBuilder()
-        Dim connectionString As String = "Data Source=LAPTOP-4N86038V; Initial Catalog=tiendaa; User ID= sa; Password=jmsa"
+        Dim connectionString As String = "Data Source=DESKTOP-H08JMC2\\SQLEXPRESS; Initial Catalog = tienda; User ID = sa; Password=1234.abcd"
 
         'Obtenemos los datos de la venta
         Dim query As String = $"SELECT v.*  FROM Ventas v  WHERE v.IdVenta = {idVenta}"

@@ -5,7 +5,7 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\Gilberto\Desktop\WebService_PuntoVenta</_PublishTargetUrl>
-    <History>True|2023-04-09T18:00:19.0194191Z;</History>
+    <History>True|2023-04-21T02:47:40.6138580Z;True|2023-04-20T13:48:33.9217073-06:00;True|2023-04-20T13:14:35.2242557-06:00;True|2023-04-20T12:30:59.8829697-06:00;True|2023-04-20T11:53:32.3491290-06:00;True|2023-04-09T12:00:19.0194191-06:00;</History>
     <LastFailureDetails />
   </PropertyGroup>
   <ItemGroup>
@@ -69,6 +69,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     <File Include="bin/AspNet.ScriptManager.jQuery.dll">
       <publishTime>04/05/2023 15:21:24</publishTime>
     </File>
+    <File Include="bin/BouncyCastle.Crypto.dll">
+      <publishTime>04/18/2023 10:15:18</publishTime>
+    </File>
     <File Include="bin/EntityFramework.dll">
       <publishTime>04/05/2023 15:21:24</publishTime>
     </File>
@@ -89,6 +92,9 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
     </File>
     <File Include="bin/es/System.Web.Optimization.resources.dll">
       <publishTime>04/05/2023 15:21:24</publishTime>
+    </File>
+    <File Include="bin/itextsharp.dll">
+      <publishTime>04/18/2023 10:15:18</publishTime>
     </File>
     <File Include="bin/Microsoft.AspNet.FriendlyUrls.dll">
       <publishTime>04/05/2023 15:21:24</publishTime>
@@ -301,16 +307,16 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/05/2023 15:21:24</publishTime>
     </File>
     <File Include="bin/WebForms_Basic.xml">
-      <publishTime>04/09/2023 12:00:18</publishTime>
+      <publishTime>04/21/2023 00:04:39</publishTime>
     </File>
     <File Include="bin/WebGrease.dll">
       <publishTime>04/05/2023 15:21:25</publishTime>
     </File>
     <File Include="bin/web_service_tienda.dll">
-      <publishTime>04/09/2023 12:00:18</publishTime>
+      <publishTime>04/21/2023 00:04:39</publishTime>
     </File>
     <File Include="bin/web_service_tienda.pdb">
-      <publishTime>04/09/2023 12:00:18</publishTime>
+      <publishTime>04/21/2023 00:04:39</publishTime>
     </File>
     <File Include="Bundle.config">
       <publishTime>04/05/2023 15:21:25</publishTime>
@@ -556,13 +562,22 @@ https://go.microsoft.com/fwlink/?LinkID=208121.
       <publishTime>04/05/2023 15:21:26</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/09/2023 10:51:39</publishTime>
+      <publishTime>04/20/2023 11:53:31</publishTime>
     </File>
     <File Include="ws/CrudProductos.asmx">
       <publishTime>04/05/2023 15:21:27</publishTime>
     </File>
+    <File Include="ws/CrudVentas.asmx">
+      <publishTime>04/09/2023 15:49:46</publishTime>
+    </File>
     <File Include="ws/DatosTablas.asmx">
       <publishTime>04/09/2023 09:38:21</publishTime>
+    </File>
+    <File Include="ws/GeneradorReportes.asmx">
+      <publishTime>04/19/2023 23:04:28</publishTime>
+    </File>
+    <File Include="ws/GeneradorTickets.asmx">
+      <publishTime>04/18/2023 10:15:18</publishTime>
     </File>
     <File Include="ws/login.asmx">
       <publishTime>04/05/2023 15:21:27</publishTime>
